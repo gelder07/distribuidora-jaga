@@ -28,6 +28,8 @@ body{background:var(--tinta);color:var(--texto);font-family:"Poppins",system-ui,
 .desk iframe{position:absolute;top:0;left:0;width:1440px;border:0;transform-origin:0 0}
 .movil{width:390px;max-width:100%;border:10px solid #000;border-radius:44px;overflow:hidden;background:#fff;box-shadow:0 20px 60px rgba(0,0,0,.45)}
 .movil iframe{display:block;width:100%;height:min(780px,calc(100dvh - 160px));border:0}
+.nota{max-width:900px;margin:0 auto;padding:0 max(16px,env(safe-area-inset-right,0px)) 40px max(16px,env(safe-area-inset-left,0px));color:var(--texto-2);font-size:14px;line-height:1.6}
+.nota strong{color:var(--texto)}
 @media (max-width:700px){.ctrl{margin-left:0}.desk-only{display:none}}
 </style>
 </head><body>
@@ -41,6 +43,7 @@ body{background:var(--tinta);color:var(--texto);font-family:"Poppins",system-ui,
  </div>
 </header>
 <main class="escena" id="escena"></main>
+
 <script>
 let pag="inicio", dis=matchMedia("(max-width:700px)").matches?"mov":"esc";
 const esc=document.getElementById("escena");
@@ -62,5 +65,4 @@ addEventListener("resize",ajusta);
 try{const h=location.hash.slice(1);if(["catalogo","marcas","nosotros","contacto","pago"].includes(h))pag=h}catch(e){}
 pinta();
 </script>
-
 </body></html>
