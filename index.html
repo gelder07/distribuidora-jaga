@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>JAGA Sitio Web</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<style>
+/* Visor de la propuesta: fondo de marca oscuro, el sitio es el protagonista. Tema único por decisión. */
+:root{--tinta:#101820;--panel:#18232D;--linea:#2A3946;--texto:#E6ECF0;--texto-2:#9FB0BC;--naranja:#F1A300;--azul:#004C6C;color-scheme:dark}
+body{background:var(--tinta);color:var(--texto);font-family:"Poppins",system-ui,sans-serif;font-size:15px}
+.top{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;padding-block:14px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));border-bottom:1px solid var(--linea)}
+.top img{height:30px;width:auto}
+.top h1{font-size:15px;font-weight:600;margin:0;color:var(--texto-2)}
+.ctrl{display:flex;flex-wrap:wrap;gap:10px;margin-left:auto}
+.pags{flex-wrap:wrap;max-width:100%}
+.top{row-gap:10px}
+.seg{display:inline-flex;background:var(--panel);border:1px solid var(--linea);border-radius:10px;padding:3px}
+.seg button{border:0;background:transparent;color:var(--texto-2);font:inherit;font-weight:600;padding:8px 14px;border-radius:8px;cursor:pointer;min-height:38px}
+.seg button[aria-pressed="true"]{background:var(--naranja);color:var(--tinta)}
+.seg button:focus-visible,a:focus-visible{outline:2px solid var(--naranja);outline-offset:2px}
+.abrir{color:var(--texto);font-weight:600;text-decoration:none;padding:8px 12px;border:1px solid var(--linea);border-radius:10px;min-height:38px;display:inline-flex;align-items:center}
+.abrir:hover{border-color:var(--naranja)}
+.escena{padding-block:24px 40px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;justify-content:center}
+.desk{width:100%;max-width:1440px}
+.desk .barra{height:30px;background:var(--panel);border:1px solid var(--linea);border-bottom:0;border-radius:12px 12px 0 0;display:flex;align-items:center;gap:6px;padding:0 12px}
+.desk .barra i{width:10px;height:10px;border-radius:50%;background:var(--linea)}
+.desk .marco{position:relative;width:100%;overflow:hidden;border:1px solid var(--linea);border-radius:0 0 12px 12px;background:#fff}
+.desk iframe{position:absolute;top:0;left:0;width:1440px;border:0;transform-origin:0 0}
+.movil{width:390px;max-width:100%;border:10px solid #000;border-radius:44px;overflow:hidden;background:#fff;box-shadow:0 20px 60px rgba(0,0,0,.45)}
+.movil iframe{display:block;width:100%;height:min(780px,calc(100dvh - 160px));border:0}
+.nota{max-width:900px;margin:0 auto;padding:0 max(16px,env(safe-area-inset-right,0px)) 40px max(16px,env(safe-area-inset-left,0px));color:var(--texto-2);font-size:14px;line-height:1.6}
+.nota strong{color:var(--texto)}
+@media (max-width:700px){.ctrl{margin-left:0}.desk-only{display:none}}
+</style>
+</head><body>
+<header class="top">
+ <img src="img/logo-h-blanco.webp" alt="Distribuidora JAGA" width="560" height="163">
+ <h1>Propuesta de sitio web</h1>
+ <div class="ctrl">
+  <div class="seg pags" role="group" aria-label="Página"><button id="p-inicio" aria-pressed="true" data-p="inicio">Inicio</button><button id="p-catalogo" aria-pressed="false" data-p="catalogo">Catálogo</button><button id="p-marcas" aria-pressed="false" data-p="marcas">Marcas afiliadas</button><button id="p-nosotros" aria-pressed="false" data-p="nosotros">Nosotros</button><button id="p-contacto" aria-pressed="false" data-p="contacto">Contacto</button><button id="p-pago" aria-pressed="false" data-p="pago">Pago en línea</button></div>
+  <div class="seg desk-only" role="group" aria-label="Dispositivo"><button id="d-esc" aria-pressed="true" data-d="esc">Escritorio</button><button id="d-mov" aria-pressed="false" data-d="mov">Celular</button></div>
+  <a class="abrir" id="abrir" href="inicio.html">Abrir página completa</a>
+ </div>
+</header>
+<main class="escena" id="escena"></main>
+<p class="nota"><strong>Cómo revisarla:</strong> navega y prueba el carrito, la búsqueda, los filtros y la ficha de producto (toca un producto). En <strong>Marcas afiliadas</strong> toca una marca para ver la transición. En <strong>Pago en línea</strong> recorre el flujo completo: si el pedido está vacío, carga uno de ejemplo; la tarjeta de prueba es 4111 1111 1111 1111 y el código del banco, 123456. Los productos y precios del catálogo son de ejemplo, ilustrados con empaques genéricos mientras JAGA entrega sus fotos. Las promociones, el logo y las fotos del camión son material de la marca.</p>
+<script>
+let pag="inicio", dis=matchMedia("(max-width:700px)").matches?"mov":"esc";
+const esc=document.getElementById("escena");
+function pinta(){
+  document.querySelectorAll("[data-p]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.p===pag));
+  document.querySelectorAll("[data-d]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.d===dis));
+  document.getElementById("abrir").href=pag+".html";
+  if(dis==="mov"){esc.innerHTML=`<div class="movil"><iframe title="Vista celular: ${pag}" src="${pag}.html"></iframe></div>`;return}
+  esc.innerHTML=`<div class="desk"><div class="barra" aria-hidden="true"><i></i><i></i><i></i></div><div class="marco"><iframe title="Vista escritorio: ${pag}" src="${pag}.html"></iframe></div></div>`;
+  ajusta();
+}
+function ajusta(){
+  const m=esc.querySelector(".marco"); if(!m) return;
+  const f=m.querySelector("iframe"), s=m.clientWidth/1440, h=Math.max(480,Math.min(innerHeight-150,1000));
+  f.style.transform=`scale(${s})`; f.style.height=(h/s)+"px"; m.style.height=h+"px";
+}
+document.addEventListener("click",e=>{const b=e.target.closest("[data-p],[data-d]");if(!b)return;if(b.dataset.p)pag=b.dataset.p;if(b.dataset.d)dis=b.dataset.d;pinta();scrollTo(0,0)});
+addEventListener("resize",ajusta);
+try{const h=location.hash.slice(1);if(["catalogo","marcas","nosotros","contacto","pago"].includes(h))pag=h}catch(e){}
+pinta();
+</script>
+
+</body></html>
