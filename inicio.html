@@ -439,7 +439,7 @@ html:not([data-portada="entrada"]) [data-hero="entrada"]{display:none!important}
 .i-rotulo{position:absolute;font-family:var(--f-marca);color:rgba(0,76,108,.14);font-size:calc(var(--u)*180px);line-height:1;white-space:nowrap}
 /* capas de texto */
 .ent-txt{position:absolute;left:0;right:0;top:0;padding-top:clamp(110px,15vh,150px);padding-bottom:60px;background:linear-gradient(180deg,rgba(0,34,50,.85),rgba(0,34,50,.6) 70%,transparent);text-align:center;display:flex;flex-direction:column;align-items:center;padding-inline:16px;text-shadow:0 2px 18px rgba(0,30,45,.55)}
-.ent-txt h1{margin:0 0 10px;color:var(--blanco);font-size:clamp(30px,5vw,72px);max-width:18ch;text-wrap:balance}
+.ent-txt h2{margin:0 0 10px;color:var(--blanco);font-size:clamp(30px,5vw,72px);max-width:18ch;text-wrap:balance}
 .ent-txt .lead{margin:0;max-width:46ch;color:#fff;font-weight:500}
 .ent-txt .caja-pista{color:#fff}
 .ent-cap{position:absolute;left:50%;bottom:calc(64px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);margin:0;background:rgba(16,24,32,.82);backdrop-filter:blur(6px);padding:10px 18px;border-radius:999px;font-weight:600;font-size:clamp(14px,1.4vw,18px);white-space:nowrap;opacity:0;transition:opacity .35s;border-left:6px solid var(--naranja)}
@@ -460,20 +460,21 @@ body{overflow-x:clip}
 
 /* ===== 1. La caja JAGA ===== */
 .caja-sec{position:relative;height:280vh;background:var(--azul);color:var(--blanco)}
-.caja-sticky{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;isolation:isolate}
+.caja-sticky{position:sticky;top:var(--cab-h,0px);height:calc(100vh - var(--cab-h,0px));height:calc(100svh - var(--cab-h,0px));overflow:hidden;isolation:isolate}
 .caja-sticky::before{content:"";position:absolute;inset:0;z-index:-2;background:var(--naranja);clip-path:polygon(0 82%,100% 58%,100% 100%,0 100%)}
 .caja-sticky::after{content:"";position:absolute;inset:0;z-index:-2;background:radial-gradient(ellipse 60% 45% at 50% 62%,rgba(255,255,255,.14),transparent 70%)}
+@media (max-height:700px) and (max-width:899px){.caja-cifras{display:none!important}.caja-txt2{top:24px!important}}
 .caja-fondo-txt{position:absolute;left:50%;top:52%;transform:translate(-50%,-50%);z-index:-1;font-family:var(--f-marca);font-size:clamp(140px,42vw,560px);line-height:.8;color:transparent;-webkit-text-stroke:2px rgba(255,255,255,.09);white-space:nowrap;pointer-events:none}
-.caja-txt1{position:absolute;left:0;right:0;top:clamp(120px,15vh,150px);text-align:center;display:flex;flex-direction:column;align-items:center}
-.caja-txt1 h1{margin:0 0 12px;color:var(--blanco);font-size:clamp(27px,4.4vw,64px);max-width:20ch;text-wrap:balance}
-@media (max-width:899px){.caja-txt1{top:96px}.caja-txt1 .hero-eyebrow{font-size:11px}.caja-txt1 .lead{font-size:15px;line-height:1.5}.caja-pista{margin-top:14px}}
+.caja-txt1{position:absolute;left:0;right:0;top:clamp(20px,6vh,64px);text-align:center;display:flex;flex-direction:column;align-items:center}
+.caja-txt1 h2{margin:0 0 12px;color:var(--blanco);font-size:clamp(27px,4.4vw,64px);max-width:20ch;text-wrap:balance}
+@media (max-width:899px){.caja-txt1{top:20px}.caja-txt1 .hero-eyebrow{font-size:11px}.caja-txt1 .lead{font-size:15px;line-height:1.5}.caja-pista{margin-top:14px}}
 .caja-txt1 .lead{margin:0 auto;color:#E6ECF0;max-width:46ch}
-@media (min-width:900px){.caja-txt1{top:92px}.caja-txt1 .lead{max-width:62ch}.caja-pista{margin-top:16px}}
+@media (min-width:900px){.caja-txt1{top:clamp(24px,6vh,64px)}.caja-txt1 .lead{max-width:62ch}.caja-pista{margin-top:16px}}
 .caja-pista{display:flex;align-items:center;gap:10px;margin:22px 0 0;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#C9D3DA}
 .raton{width:20px;height:32px;border:2px solid currentColor;border-radius:12px;position:relative}
 .raton::after{content:"";position:absolute;left:50%;top:6px;width:4px;height:7px;margin-left:-2px;border-radius:2px;background:var(--naranja);animation:rueda 1.6s infinite}
 @keyframes rueda{0%{transform:translateY(0);opacity:1}70%{transform:translateY(10px);opacity:0}100%{opacity:0}}
-.caja-txt2{position:absolute;left:0;right:0;top:clamp(110px,14vh,140px);text-align:center;opacity:0;pointer-events:none;padding-inline:16px}
+.caja-txt2{position:absolute;left:0;right:0;top:clamp(20px,6vh,64px);text-align:center;opacity:0;pointer-events:none;padding-inline:16px}
 .caja-cifras{display:flex;justify-content:center;flex-wrap:wrap;gap:6px 22px;margin:0 0 16px;font-family:var(--f-titulo);font-style:italic;font-weight:800;font-stretch:115%;text-transform:uppercase;font-size:clamp(18px,2.4vw,28px)}
 .caja-cifras span:not(:last-child)::after{content:"";display:inline-block;width:8px;height:8px;margin-left:22px;background:var(--naranja);transform:rotate(45deg) translateY(-3px)}
 .caja-escena{--w:clamp(150px,34vmin,280px);position:absolute;left:50%;top:var(--caja-y,70%);width:0;height:0;perspective:1100px;perspective-origin:50% -40%}
@@ -504,7 +505,7 @@ body{overflow-x:clip}
 .ca-hero::before{content:"";position:absolute;inset:0;z-index:-2;background:var(--naranja);clip-path:polygon(0 88%,100% 70%,100% 100%,0 100%)}
 .ca-fondo{position:absolute;right:-4vw;top:50%;transform:translateY(-50%);z-index:-1;font-family:var(--f-marca);font-size:clamp(160px,34vw,520px);line-height:.8;color:transparent;-webkit-text-stroke:2px rgba(255,255,255,.08);white-space:nowrap;pointer-events:none}
 .ca-in{display:grid;gap:28px;grid-template-columns:minmax(0,1fr);align-items:center}
-.ca-txt h1{margin:0 0 14px;color:var(--blanco);font-size:clamp(30px,4.2vw,60px);text-wrap:balance}
+.ca-txt h2{margin:0 0 14px;color:var(--blanco);font-size:clamp(30px,4.2vw,60px);text-wrap:balance}
 .ca-txt .lead{margin:0 0 24px;color:#E6ECF0;max-width:46ch}
 .ca-txt .hero-btns{justify-content:flex-start}
 .ca-ayuda{margin:0 0 10px;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#C9D3DA}
@@ -781,13 +782,22 @@ body{overflow-x:clip}
   <button type="button" role="menuitemradio" data-ps="entrada"><strong>Recorrido por la distribuidora</strong><span>La cámara entra y mira los pasillos</span></button>
  </div>
 </div>
+<section class="hero" aria-labelledby="hb-t">
+ <picture><source media="(min-width:900px)" srcset="img/hero-1600.webp" width="1600" height="582"><img class="hero-img" src="img/hero-800.webp" alt="Camión rotulado de Distribuidora JAGA frente a una pulpería" width="800" height="445" fetchpriority="high"></picture>
+ <div class="wrap hero-cont"><div class="hero-texto">
+  <p class="hero-eyebrow">Distribuidora de productos de consumo · Nicaragua</p>
+  <h1 class="marca h-display" id="hb-t">Distribuimos las marcas que mueven Nicaragua</h1>
+  <p class="lead">Abarrotes, limpieza, higiene, farmacia, alimentos y bebidas a precio de distribuidora, con entrega a domicilio.</p>
+  <div class="hero-btns"><a class="btn btn-primario" href="catalogo.html">Ver catálogo<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a><a class="btn btn-claro" href="marcas.html">Ver marcas</a></div>
+ </div></div>
+</section>
 <section class="caja-sec" data-hero="caja" data-caja aria-labelledby="hero-t">
  <div class="caja-sticky">
   <span class="caja-fondo-txt" aria-hidden="true">JAGA</span>
   <div class="caja-txt1 wrap" data-c-txt1>
-   <p class="hero-eyebrow">Distribuidora de productos de consumo · Nicaragua</p>
-   <h1 class="marca h-display" id="hero-t">Distribuimos las marcas que mueven Nicaragua</h1>
-   <p class="lead">Abarrotes, limpieza, higiene, farmacia, alimentos y bebidas de las marcas que ya conoces, a precio de distribuidora y hasta tu puerta.</p>
+   <p class="hero-eyebrow">Lo que distribuimos</p>
+   <h2 class="marca h-display" id="hero-t">Las marcas que ya conoces, hasta tu puerta</h2>
+   <p class="lead">Abarrotes, limpieza, higiene, farmacia, alimentos y bebidas a precio de distribuidora.</p>
    <p class="caja-pista" aria-hidden="true"><span class="raton"></span>Desliza y mira lo que distribuimos</p>
   </div>
   <div class="caja-txt2" data-c-txt2>
@@ -811,7 +821,7 @@ body{overflow-x:clip}
   <div class="ent-vineta" aria-hidden="true"></div>
   <div class="ent-txt" data-e-t0>
    <p class="hero-eyebrow">Distribuidora JAGA · Nicaragua</p>
-   <h1 class="marca h-display" id="ent-t">Bienvenido a tu distribuidora</h1>
+   <h2 class="marca h-display" id="ent-t">Bienvenido a tu distribuidora</h2>
    <p class="lead">Entra y recorre JAGA por dentro: las categorías y las marcas que llevamos a hogares y negocios de Nicaragua.</p>
    <p class="caja-pista"><span class="raton"></span>Desliza para entrar</p>
   </div>
@@ -830,7 +840,7 @@ body{overflow-x:clip}
  <div class="wrap ca-in">
   <div class="ca-txt">
    <p class="hero-eyebrow">Distribuidora de productos de consumo · Nicaragua</p>
-   <h1 class="marca h-display" id="hca-t">Distribuimos las marcas que mueven Nicaragua</h1>
+   <h2 class="marca h-display" id="hca-t">Las marcas que ya conoces, hasta tu puerta</h2>
    <p class="lead">Abarrotes, limpieza, higiene, farmacia, alimentos y bebidas de las marcas que ya conoces, a precio de distribuidora y hasta tu puerta.</p>
    <div class="hero-btns"><a class="btn btn-primario" href="catalogo.html">Ver catálogo<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a><a class="btn btn-claro" href="https://wa.me/50586005421?text=Hola%20JAGA%2C%20quiero%20hacer%20un%20pedido" target="_blank" rel="noopener" data-icon="wa">Pedir por WhatsApp</a></div>
   </div>
@@ -1435,21 +1445,19 @@ function iniciarCaja(){
   const els=[...cont.children], caja=sec.querySelector("[data-c-caja]"), s1=sec.querySelector("[data-c-s1]"), s2=sec.querySelector("[data-c-s2]");
   const t1=sec.querySelector("[data-c-txt1]"), t2=sec.querySelector("[data-c-txt2]"), esc=sec.querySelector(".caja-escena");
   let W=0,H=0,ps=100;
-  function medir(){W=sec.clientWidth;H=window.innerHeight;const movil=W<900;const cajaY=movil?.72:.74;sec.style.setProperty("--caja-y",(cajaY*100)+"%");ps=Math.round(Math.min(Math.max(W,H)*(movil?.17:.11),150));if(movil)ps=Math.min(ps,Math.round(W*.2));cont.style.setProperty("--ps",ps+"px")}
+  function medir(){const cabH=(document.querySelector(".cab")||{offsetHeight:0}).offsetHeight;sec.style.setProperty("--cab-h",cabH+"px");W=sec.clientWidth;H=window.innerHeight-cabH;const movil=W<900;const cajaY=movil?.68:.72;sec.style.setProperty("--caja-y",(cajaY*100)+"%");ps=movil?Math.round(Math.min(W*.19,110)):Math.round(Math.min(Math.max(W,H)*.1,140));cont.style.setProperty("--ps",ps+"px")}
   function pinta(p){
     const movil=W<900;
     /* Antes de fijarse la escena, la caja sube para verse completa en la primera pantalla */
-    sec.style.setProperty("--caja-y",(lerp(movil?.66:.71,movil?.72:.74,ease(seg(p,0,.22)))*100)+"%");
     const abre=ease(seg(p,.04,.28));
     s1.style.setProperty("--a1",(-90+abre*220)+"deg"); s2.style.setProperty("--a2",(90-abre*220)+"deg");
     caja.style.transform=`rotateX(${-14-abre*6}deg) rotateY(${-32+ease(seg(p,0,.6))*20}deg) scale(${1-ease(seg(p,.5,.9))*.12})`;
     t1.style.opacity=1-seg(p,.12,.3); t1.style.transform=`translateY(${-seg(p,.12,.3)*40}px)`;
     const fin=ease(seg(p,.72,.9)); t2.style.opacity=fin; t2.style.transform=`translateY(${(1-fin)*30}px)`; t2.style.pointerEvents=fin>.9?"auto":"none";
-    const n=els.length, Rx=Math.min(W*(movil?.4:.38),560), Ry=Math.min(H*(movil?.22:.3),300), baseY=-(H*(movil?.06:.08));
+    const n=els.length, Rx=Math.min(W*(movil?.36:.38),560), Ry=Math.min(H*(movil?.17:.26),280), baseY=-(H*(movil?(H<700?.08:.15):.07)), dxp=2*Rx/(n-1), alt=dxp<ps*1.05?ps*1.08:0;
     els.forEach((el,i)=>{
       const k=ease(seg(p,.2+i*.035,.58+i*.035));
-      const a=(-75+150*(i/(n-1)))*Math.PI/180;
-      const tx=Math.sin(a)*Rx, ty=baseY-Math.cos(a)*Ry*(movil?(i%2?1:.72):1);
+      const u=i/(n-1), tx=lerp(-Rx,Rx,u), ty=movil?baseY-ps*.2-(i%2?ps*1.25:0):baseY-Ry*(.3+.7*Math.sin(Math.PI*u))-(i%2?alt:0);
       const x=lerp(0,tx,k), y=lerp(-ps*.2,ty,k)-Math.sin(k*Math.PI)*H*.12;
       const s=lerp(.25,1,k), r=lerp(i%2?-40:40,0,k);
       el.style.transform=`translate(${x}px,${y}px) scale(${s}) rotate(${r}deg)`;
@@ -1458,7 +1466,7 @@ function iniciarCaja(){
     });
   }
   let ticking=false;
-  const leer=()=>{ticking=false;const r=sec.getBoundingClientRect();const total=sec.offsetHeight-H;pinta(MQ_REDUCE.matches?1:clamp(-r.top/total))};
+  const leer=()=>{ticking=false;const r=sec.getBoundingClientRect();const cabH=window.innerHeight-H;const total=sec.offsetHeight-H;pinta(MQ_REDUCE.matches?1:clamp((cabH-r.top)/total))};
   medir(); leer();
   addEventListener("scroll",()=>{if(!ticking){ticking=true;requestAnimationFrame(leer)}},{passive:true});
   addEventListener("resize",()=>{medir();leer()});
