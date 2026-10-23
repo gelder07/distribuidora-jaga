@@ -6,7 +6,7 @@ Propuesta navegable del sitio de Distribuidora JAGA: móvil primero, con catálo
 
 | Archivo | Página |
 | --- | --- |
-| `index.html` | Visor de la propuesta (escritorio y celular) |
+| `index.html` | Entrada: abre directo el inicio |
 | `inicio.html` | Inicio |
 | `catalogo.html` | Catálogo con buscador, filtros y ficha de producto |
 | `marcas.html` | Marcas afiliadas (transición a los productos de cada marca) |
@@ -18,7 +18,7 @@ Propuesta navegable del sitio de Distribuidora JAGA: móvil primero, con catálo
 
 ## Ver en local
 
-Abre `index.html` en el navegador (las fuentes Saira y Poppins se cargan desde Google Fonts; Crocker va incluida).
+Abre `index.html` o `inicio.html` en el navegador (las fuentes Saira y Poppins se cargan desde Google Fonts; Crocker va incluida).
 
 ## Demostración del pago
 
