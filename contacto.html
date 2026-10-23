@@ -421,7 +421,7 @@ select,input,textarea,option{color-scheme:light only}
  <div class="cab-fila">
   <button class="icono-btn btn-menu" data-abrir=".menu-movil" aria-label="Abrir menú" data-icon="menu"></button>
   <a class="cab-logo" href="inicio.html"><img src="img/logo-h-color.webp" alt="Distribuidora JAGA" width="560" height="163"></a>
-  <nav class="cab-nav" aria-label="Principal"><a href="inicio.html">Inicio</a><a href="catalogo.html">Catálogo</a><a href="marcas.html">Marcas afiliadas</a><a href="nosotros.html">Nosotros</a><a href="contacto.html" aria-current="page">Contacto</a></nav>
+  <nav class="cab-nav" aria-label="Principal"><a href="inicio.html">Inicio</a><a href="marcas.html">Marcas afiliadas</a><a href="nosotros.html">Nosotros</a><a href="contacto.html" aria-current="page">Contacto</a><a href="catalogo.html">Compras</a></nav>
   <span class="espacio"></span>
   <form class="buscador" role="search" data-buscar><label class="sr" for="buscar-escritorio">Buscar productos</label><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg><input id="buscar-escritorio" name="q" type="search" placeholder="¿Qué necesitas hoy?" autocomplete="off"></form>
   <button class="icono-btn carrito" data-abrir=".carrito-panel" aria-label="Ver mi pedido" data-icon="cart"><span class="txt">Mi pedido</span><span class="contador" hidden>0</span></button>
@@ -432,7 +432,7 @@ select,input,textarea,option{color-scheme:light only}
 <nav class="menu-movil" hidden aria-label="Menú">
  <button class="icono-btn cerrar" data-cerrar aria-label="Cerrar menú" data-icon="x"></button>
  <img src="img/logo-h-color.webp" alt="" width="560" height="163" style="height:40px;width:auto;margin:0 0 12px">
- <a href="inicio.html">Inicio</a><a href="catalogo.html">Catálogo</a><a href="marcas.html">Marcas afiliadas</a><a href="nosotros.html">Nosotros</a><a href="contacto.html" aria-current="page">Contacto</a>
+ <a href="inicio.html">Inicio</a><a href="marcas.html">Marcas afiliadas</a><a href="nosotros.html">Nosotros</a><a href="contacto.html" aria-current="page">Contacto</a><a href="catalogo.html">Compras</a>
  <a class="btn btn-wa" style="margin-top:16px;border:0" href="https://wa.me/50586005421" target="_blank" rel="noopener" data-icon="wa">Escríbenos por WhatsApp</a>
 </nav>
 <main id="contenido">
@@ -602,6 +602,9 @@ const P = [
  {id:23,n:"Baterías alcalinas AA",m:"STROM",c:"hogar",pr:"Blíster 4 unid.",pres:["Blíster 2 unid.","Blíster 4 unid."],$:60,f:"blister",col:"#0E2A47",ac:"#F5C400",l:"STROM"},
  {id:24,n:"Baterías alcalinas AAA",m:"STROM",c:"hogar",pr:"Blíster 4 unid.",pres:["Blíster 2 unid.","Blíster 4 unid."],$:60,f:"blister",col:"#0E2A47",ac:"#F5C400",l:"STROM"}
 ];
+/* Fotos reales de los productos de las marcas (recortadas de sus piezas de redes) */
+const FOTOS={13:"foto-wixy-cloro",14:"foto-wixy-barra",15:"foto-zass",17:"foto-henkall",21:"foto-biogel",22:"foto-wellpro-vitc",25:"foto-wellpro-osito",26:"foto-wellpro-sinazucar",23:"foto-strom-aa",24:"foto-strom-aaa"};
+P.forEach(p=>{if(FOTOS[p.id])p.foto=FOTOS[p.id]});
 const MARCAS = [
  {id:"wixy",n:"WIXY",cat:"Limpieza",lema:"Máximo ahorro, máxima limpieza",img:"promo-wixy-cloro",img2:"promo-wixy-fragancia",col:"#1F5FA8",txt:"Cloro granulado concentrado y limpiadores de inodoro en barra para el hogar y el negocio."},
  {id:"zass",n:"ZASS",cat:"Limpieza · Insecticidas",lema:"¡Y adiós mosquitos!",img:"promo-zass",col:"#2E8B3E",txt:"Espirales repelentes de mosquitos con aroma a lavanda."},
@@ -679,7 +682,8 @@ function pack(p,modo){
   const txt = (x,y,s,col)=>`<text x="${x}" y="${y}" text-anchor="middle" font-family="Poppins,system-ui,sans-serif" font-weight="700" font-size="${s}" fill="${col}" letter-spacing=".5">${L}</text>`;
   const fs = L.length>8?11:L.length>6?13:15;
   let g="";
-  switch(p.f){
+  if(p.foto){g=`<image href="img/${p.foto}.webp" x="26" y="18" width="148" height="150" preserveAspectRatio="xMidYMid meet"/>`}
+  else switch(p.f){
     case "bolsa": g=`<path d="M58 50h84l6 104a10 10 0 0 1-10 11H62a10 10 0 0 1-10-11z" fill="${c}" ${stroke}/><path d="M58 50h84l-3-12H61z" fill="${a}"/><path d="M61 38h78" stroke="${a}" stroke-width="4" stroke-dasharray="4 3"/><rect x="66" y="88" width="68" height="40" rx="20" fill="${light?a:'#FFFFFF'}"/>${txt(100,113,fs,light?'#FFFFFF':c)}<rect x="74" y="140" width="52" height="6" rx="3" fill="${a}" opacity=".5"/>`;break;
     case "botella": g=`<rect x="88" y="26" width="24" height="14" rx="3" fill="${a}"/><path d="M90 40h20v14c0 6 16 12 16 26v78a8 8 0 0 1-8 8H82a8 8 0 0 1-8-8V80c0-14 16-20 16-26z" fill="${c}" ${stroke} opacity="${c==='#CFE8F7'?'.95':'1'}"/><rect x="74" y="96" width="52" height="40" fill="${light?a:'#FFFFFF'}"/>${txt(100,121,fs,light?'#FFFFFF':a)}`;break;
     case "caja": g=`<path d="M130 48l14-10v116l-14 10z" fill="${a}" opacity=".55"/><path d="M56 48l14-10h74l-14 10z" fill="${a}" opacity=".35"/><rect x="56" y="48" width="74" height="116" rx="3" fill="${c}" ${stroke}/><rect x="56" y="80" width="74" height="36" fill="${a}"/>${txt(93,104,fs,c)}<circle cx="93" cy="140" r="12" fill="#FFFFFF" opacity=".55"/>`;break;

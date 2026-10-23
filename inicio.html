@@ -746,6 +746,27 @@ body{overflow-x:clip}
  .cinta-pista,.rodillos,.cit .cit-img,.pk-img svg,.raton::after{animation:none!important}
  .cinta{overflow-x:auto}
 }
+/* ===== Por categoría: la categoría elegida y sus productos debajo ===== */
+.cs-chips{flex-wrap:nowrap;overflow-x:auto;padding-bottom:6px;margin-right:calc(-1 * var(--gutter-r));padding-right:var(--gutter-r);scrollbar-width:none}
+.cs-chips::-webkit-scrollbar{display:none}
+.cs-cab{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:16px 18px;border-radius:14px;background:var(--blanco);border:1px solid var(--borde);margin:14px 0 18px}
+.cs-cab .pq-ico{margin:0;background:var(--azul);color:var(--blanco)}
+.cs-txt{flex:1 1 220px;min-width:0}
+.cs-txt .h3{color:var(--azul)}
+.cs-txt p{margin:2px 0 0}
+.cs-grid .prod{animation:csEntra .35s cubic-bezier(.23,1,.32,1) both}
+@keyframes csEntra{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.cs-grid .prod{animation:none}}
+/* ===== Categorías destacadas: cada categoría con sus productos debajo, sin pestañas ===== */
+.cd-lista{display:grid;grid-template-columns:minmax(0,1fr);gap:44px}
+.cd-bloque{min-width:0}
+@media (min-width:900px){.cd-lista{gap:64px}}
+.cd-bloque .cs-cab{margin-top:0}
+@media (max-width:639px){
+ .cd-fila{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(210px,72%);grid-template-columns:none;overflow-x:auto;scroll-snap-type:x mandatory;margin-right:calc(-1 * var(--gutter-r));padding-right:var(--gutter-r);padding-bottom:6px;scrollbar-width:none}
+ .cd-fila::-webkit-scrollbar{display:none}
+ .cd-fila .prod{scroll-snap-align:start}
+}
 </style>
 </head>
 <body>
@@ -755,7 +776,7 @@ body{overflow-x:clip}
  <div class="cab-fila">
   <button class="icono-btn btn-menu" data-abrir=".menu-movil" aria-label="Abrir menú" data-icon="menu"></button>
   <a class="cab-logo" href="inicio.html"><img src="img/logo-h-color.webp" alt="Distribuidora JAGA" width="560" height="163"></a>
-  <nav class="cab-nav" aria-label="Principal"><a href="inicio.html" aria-current="page">Inicio</a><a href="catalogo.html">Catálogo</a><a href="marcas.html">Marcas afiliadas</a><a href="nosotros.html">Nosotros</a><a href="contacto.html">Contacto</a></nav>
+  <nav class="cab-nav" aria-label="Principal"><a href="inicio.html" aria-current="page">Inicio</a><a href="marcas.html">Marcas afiliadas</a><a href="nosotros.html">Nosotros</a><a href="contacto.html">Contacto</a><a href="catalogo.html">Compras</a></nav>
   <span class="espacio"></span>
   <form class="buscador" role="search" data-buscar><label class="sr" for="buscar-escritorio">Buscar productos</label><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg><input id="buscar-escritorio" name="q" type="search" placeholder="¿Qué necesitas hoy?" autocomplete="off"></form>
   <button class="icono-btn carrito" data-abrir=".carrito-panel" aria-label="Ver mi pedido" data-icon="cart"><span class="txt">Mi pedido</span><span class="contador" hidden>0</span></button>
@@ -766,22 +787,13 @@ body{overflow-x:clip}
 <nav class="menu-movil" hidden aria-label="Menú">
  <button class="icono-btn cerrar" data-cerrar aria-label="Cerrar menú" data-icon="x"></button>
  <img src="img/logo-h-color.webp" alt="" width="560" height="163" style="height:40px;width:auto;margin:0 0 12px">
- <a href="inicio.html" aria-current="page">Inicio</a><a href="catalogo.html">Catálogo</a><a href="marcas.html">Marcas afiliadas</a><a href="nosotros.html">Nosotros</a><a href="contacto.html">Contacto</a>
+ <a href="inicio.html" aria-current="page">Inicio</a><a href="marcas.html">Marcas afiliadas</a><a href="nosotros.html">Nosotros</a><a href="contacto.html">Contacto</a><a href="catalogo.html">Compras</a>
  <a class="btn btn-wa" style="margin-top:16px;border:0" href="https://wa.me/50586005421" target="_blank" rel="noopener" data-icon="wa">Escríbenos por WhatsApp</a>
 </nav>
 <main id="contenido">
 
 <!-- 1. LA CAJA JAGA: se abre con el scroll y saca los productos -->
-<script>(function(){var h="caja";try{h=localStorage.getItem("jaga-hero")||"caja"}catch(e){}if(!/^(caja|canasta|entrada)$/.test(h))h="caja";document.documentElement.setAttribute("data-portada",h);})();</script>
-<div class="portada-sel" data-portada-sel>
- <button type="button" class="ps-btn" data-ps-abrir aria-expanded="false"><span class="ps-et">Portada</span><span data-ps-nombre></span><span aria-hidden="true">▾</span></button>
- <div class="ps-menu" data-ps-menu hidden role="menu">
-  <p class="ps-tit">Elige la portada para ver</p>
-  <button type="button" role="menuitemradio" data-ps="caja"><strong>Caja animada</strong><span>La caja que se abre al bajar (principal)</span></button>
-  <button type="button" role="menuitemradio" data-ps="canasta"><strong>Lluvia a la canasta</strong><span>Los productos caen en la canasta</span></button>
-  <button type="button" role="menuitemradio" data-ps="entrada"><strong>Recorrido por la distribuidora</strong><span>La cámara entra y mira los pasillos</span></button>
- </div>
-</div>
+<script>document.documentElement.setAttribute("data-portada","caja");</script>
 <section class="hero" aria-labelledby="hb-t">
  <picture><source media="(min-width:900px)" srcset="img/hero-1600.webp" width="1600" height="582"><img class="hero-img" src="img/hero-800.webp" alt="Camión rotulado de Distribuidora JAGA frente a una pulpería" width="800" height="445" fetchpriority="high"></picture>
  <div class="wrap hero-cont"><div class="hero-texto">
@@ -882,6 +894,20 @@ body{overflow-x:clip}
  <div class="cf-escena" data-cf tabindex="0" aria-label="Carrusel de productos"><div class="cf-pista" data-cf-pista></div><button type="button" class="giro-btn cf-prev" data-cf-prev aria-label="Anterior">‹</button><button type="button" class="giro-btn cf-next" data-cf-next aria-label="Siguiente">›</button></div>
  <div class="wrap"><div class="cf-info" data-cf-info aria-live="polite"></div></div>
 </section>
+
+<!-- 4c. POR CATEGORÍA: la categoría elegida y sus productos debajo -->
+<section class="seccion gris" id="categorias" aria-labelledby="cs-t"><div class="wrap">
+ <div class="sec-cab" data-reveal><div><p class="eyebrow">Por categoría</p><h2 class="titulo up h2" id="cs-t">Todo lo que distribuimos</h2><p class="muted sr-sub">Elige una categoría y mira sus productos.</p></div></div>
+ <div class="chips cs-chips" data-cs-chips role="toolbar" aria-label="Categorías"></div>
+ <div class="cs-cab" data-cs-cab aria-live="polite"></div>
+ <div class="grid-prod c4 cs-grid" data-cs-grid></div>
+</div></section>
+
+<!-- 4d. CATEGORÍAS DESTACADAS: cada categoría con sus productos debajo -->
+<section class="seccion" id="categorias-destacadas" aria-labelledby="cd-t"><div class="wrap">
+ <div class="sec-cab" data-reveal><div><p class="eyebrow">Categorías destacadas</p><h2 class="titulo up h2" id="cd-t">De la repisa a tu pedido</h2><p class="muted sr-sub">Cada categoría con sus productos, a la vista.</p></div></div>
+ <div class="cd-lista" data-cd></div>
+</div></section>
 
 <!-- 5. EN VITRINA -->
 <section class="seccion vitrina-sec" aria-labelledby="vi-t"><div class="wrap vit-grid" data-estrella></div></section>
@@ -1048,6 +1074,9 @@ const P = [
  {id:23,n:"Baterías alcalinas AA",m:"STROM",c:"hogar",pr:"Blíster 4 unid.",pres:["Blíster 2 unid.","Blíster 4 unid."],$:60,f:"blister",col:"#0E2A47",ac:"#F5C400",l:"STROM"},
  {id:24,n:"Baterías alcalinas AAA",m:"STROM",c:"hogar",pr:"Blíster 4 unid.",pres:["Blíster 2 unid.","Blíster 4 unid."],$:60,f:"blister",col:"#0E2A47",ac:"#F5C400",l:"STROM"}
 ];
+/* Fotos reales de los productos de las marcas (recortadas de sus piezas de redes) */
+const FOTOS={13:"foto-wixy-cloro",14:"foto-wixy-barra",15:"foto-zass",17:"foto-henkall",21:"foto-biogel",22:"foto-wellpro-vitc",25:"foto-wellpro-osito",26:"foto-wellpro-sinazucar",23:"foto-strom-aa",24:"foto-strom-aaa"};
+P.forEach(p=>{if(FOTOS[p.id])p.foto=FOTOS[p.id]});
 const MARCAS = [
  {id:"wixy",n:"WIXY",cat:"Limpieza",lema:"Máximo ahorro, máxima limpieza",img:"promo-wixy-cloro",img2:"promo-wixy-fragancia",col:"#1F5FA8",txt:"Cloro granulado concentrado y limpiadores de inodoro en barra para el hogar y el negocio."},
  {id:"zass",n:"ZASS",cat:"Limpieza · Insecticidas",lema:"¡Y adiós mosquitos!",img:"promo-zass",col:"#2E8B3E",txt:"Espirales repelentes de mosquitos con aroma a lavanda."},
@@ -1125,7 +1154,8 @@ function pack(p,modo){
   const txt = (x,y,s,col)=>`<text x="${x}" y="${y}" text-anchor="middle" font-family="Poppins,system-ui,sans-serif" font-weight="700" font-size="${s}" fill="${col}" letter-spacing=".5">${L}</text>`;
   const fs = L.length>8?11:L.length>6?13:15;
   let g="";
-  switch(p.f){
+  if(p.foto){g=`<image href="img/${p.foto}.webp" x="26" y="18" width="148" height="150" preserveAspectRatio="xMidYMid meet"/>`}
+  else switch(p.f){
     case "bolsa": g=`<path d="M58 50h84l6 104a10 10 0 0 1-10 11H62a10 10 0 0 1-10-11z" fill="${c}" ${stroke}/><path d="M58 50h84l-3-12H61z" fill="${a}"/><path d="M61 38h78" stroke="${a}" stroke-width="4" stroke-dasharray="4 3"/><rect x="66" y="88" width="68" height="40" rx="20" fill="${light?a:'#FFFFFF'}"/>${txt(100,113,fs,light?'#FFFFFF':c)}<rect x="74" y="140" width="52" height="6" rx="3" fill="${a}" opacity=".5"/>`;break;
     case "botella": g=`<rect x="88" y="26" width="24" height="14" rx="3" fill="${a}"/><path d="M90 40h20v14c0 6 16 12 16 26v78a8 8 0 0 1-8 8H82a8 8 0 0 1-8-8V80c0-14 16-20 16-26z" fill="${c}" ${stroke} opacity="${c==='#CFE8F7'?'.95':'1'}"/><rect x="74" y="96" width="52" height="40" fill="${light?a:'#FFFFFF'}"/>${txt(100,121,fs,light?'#FFFFFF':a)}`;break;
     case "caja": g=`<path d="M130 48l14-10v116l-14 10z" fill="${a}" opacity=".55"/><path d="M56 48l14-10h74l-14 10z" fill="${a}" opacity=".35"/><rect x="56" y="48" width="74" height="116" rx="3" fill="${c}" ${stroke}/><rect x="56" y="80" width="74" height="36" fill="${a}"/>${txt(93,104,fs,c)}<circle cx="93" cy="140" r="12" fill="#FFFFFF" opacity=".55"/>`;break;
@@ -1549,6 +1579,38 @@ function opLluvia(){
   const marca=i=>chips.querySelectorAll(".chip").forEach((x,j)=>x.setAttribute("aria-pressed",j===i));
   if(auto) tm=setInterval(()=>{if(!auto||document.hidden||g.getBoundingClientRect().bottom<0)return;k=(k+1)%CATS.length;marca(k);llueve(CATS[k].id)},4200);
 }
+/* 4c. Por categoría */
+function iniciarCategorias(){
+  const g=document.querySelector("[data-cs-grid]"), cab=document.querySelector("[data-cs-cab]"); if(!g) return;
+  const pinta=id=>{
+    const c=CATS.find(x=>x.id===id), ps=prodsDe(id);
+    const ir=MODO_INFO
+      ? `<a class="enlace-mas" target="_blank" rel="noopener" href="https://wa.me/${WA}?text=${encodeURIComponent("Hola JAGA, quiero información de productos de "+c.n)}">Consultar por WhatsApp${ic("arrow")}</a>`
+      : `<a class="enlace-mas" href="catalogo.html#${c.id}">Ver en Compras${ic("arrow")}</a>`;
+    cab.innerHTML=`<span class="pq-ico">${ic(c.i)}</span><div class="cs-txt"><h3 class="h3">${c.n}</h3><p class="muted">${DESC[c.id]} ${ps.length} producto${ps.length==1?"":"s"}.</p></div>${ir}`;
+    g.innerHTML=ps.map((p,i)=>cardHTML(p).replace('<article class="prod"',`<article style="animation-delay:${Math.min(i,7)*45}ms" class="prod"`)).join("");
+    refresh();
+  };
+  /* Solo estas categorías se muestran en el inicio */
+  const IDS=["limpieza","farmacia","higiene"];
+  const ch=document.querySelector("[data-cs-chips]");
+  ch.innerHTML=IDS.map((id,i)=>`<button class="chip" data-cid="${id}" aria-pressed="${i===0}">${CATS.find(c=>c.id===id).n}</button>`).join("");
+  ch.addEventListener("click",e=>{const b=e.target.closest("[data-cid]");if(!b)return;ch.querySelectorAll(".chip").forEach(x=>x.setAttribute("aria-pressed",x===b));pinta(b.dataset.cid)});
+  pinta(IDS[0]);
+}
+/* 4d. Categorías destacadas (sin pestañas) */
+function iniciarCategoriasDirecto(){
+  const cont=document.querySelector("[data-cd]"); if(!cont) return;
+  const IDS=["limpieza","farmacia","higiene"];
+  cont.innerHTML=IDS.map(id=>{
+    const c=CATS.find(x=>x.id===id), ps=prodsDe(id);
+    const ir=MODO_INFO
+      ? `<a class="enlace-mas" target="_blank" rel="noopener" href="https://wa.me/${WA}?text=${encodeURIComponent("Hola JAGA, quiero información de productos de "+c.n)}">Consultar por WhatsApp${ic("arrow")}</a>`
+      : `<a class="enlace-mas" href="catalogo.html#${c.id}">Ver en Compras${ic("arrow")}</a>`;
+    return `<div class="cd-bloque" aria-labelledby="cd-${c.id}"><div class="cs-cab"><span class="pq-ico">${ic(c.i)}</span><div class="cs-txt"><h3 class="h3" id="cd-${c.id}">${c.n}</h3><p class="muted">${DESC[c.id]} ${ps.length} producto${ps.length==1?"":"s"}.</p></div>${ir}</div><div class="grid-prod c4 cd-fila">${ps.map(cardHTML).join("")}</div></div>`;
+  }).join("");
+  refresh();
+}
 /* 5. Vitrina con inclinación */
 function iniciarVitrinaEstrella(){
   const c=document.querySelector("[data-estrella]"); if(!c) return;
@@ -1598,7 +1660,7 @@ window.initPage=function(){
   const por=document.documentElement.getAttribute("data-portada");
   selectorPortada(); iniciarEntrada();
   if(por==="caja") iniciarCaja(); if(por==="canasta") opLluvia();
-  iniciarCinta(); iniciarMarcas(); opAcor(); opCoverflow(); iniciarVitrinaEstrella(); iniciarCifras(); iniciarMazo(); iniciarRuta();
+  iniciarCinta(); iniciarMarcas(); opAcor(); opCoverflow(); iniciarCategorias(); iniciarCategoriasDirecto(); iniciarVitrinaEstrella(); iniciarCifras(); iniciarMazo(); iniciarRuta();
 };
 </script>
 </body>

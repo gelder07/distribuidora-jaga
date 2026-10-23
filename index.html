@@ -33,15 +33,6 @@ body{background:var(--tinta);color:var(--texto);font-family:"Poppins",system-ui,
 @media (max-width:700px){.ctrl{margin-left:0}.desk-only{display:none}}
 </style>
 </head><body>
-<header class="top">
- <img src="img/logo-h-blanco.webp" alt="Distribuidora JAGA" width="560" height="163">
- <h1>Propuesta de sitio web</h1>
- <div class="ctrl">
-  <div class="seg pags" role="group" aria-label="Página"><button id="p-inicio" aria-pressed="true" data-p="inicio">Inicio</button><button id="p-catalogo" aria-pressed="false" data-p="catalogo">Catálogo</button><button id="p-marcas" aria-pressed="false" data-p="marcas">Marcas afiliadas</button><button id="p-nosotros" aria-pressed="false" data-p="nosotros">Nosotros</button><button id="p-contacto" aria-pressed="false" data-p="contacto">Contacto</button><button id="p-pago" aria-pressed="false" data-p="pago">Pago en línea</button></div>
-  <div class="seg desk-only" role="group" aria-label="Dispositivo"><button id="d-esc" aria-pressed="true" data-d="esc">Escritorio</button><button id="d-mov" aria-pressed="false" data-d="mov">Celular</button></div>
-  <a class="abrir" id="abrir" href="inicio.html">Abrir página completa</a>
- </div>
-</header>
 <main class="escena" id="escena"></main>
 
 <script>
@@ -50,7 +41,7 @@ const esc=document.getElementById("escena");
 function pinta(){
   document.querySelectorAll("[data-p]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.p===pag));
   document.querySelectorAll("[data-d]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.d===dis));
-  document.getElementById("abrir").href=pag+".html";
+  const ab=document.getElementById("abrir"); if(ab) ab.href=pag+".html";
   if(dis==="mov"){esc.innerHTML=`<div class="movil"><iframe title="Vista celular: ${pag}" src="${pag}.html"></iframe></div>`;return}
   esc.innerHTML=`<div class="desk"><div class="barra" aria-hidden="true"><i></i><i></i><i></i></div><div class="marco"><iframe title="Vista escritorio: ${pag}" src="${pag}.html"></iframe></div></div>`;
   ajusta();
